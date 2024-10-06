@@ -1,0 +1,86 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 450,
+    "height": 400,
+    "title": "Birth Rates for Inner Melbourne Council Areas (2021)",
+    "projection": {
+        "type": "equalEarth"
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/main/final.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "LGA_2024_AUST_GDA2020"
+                }
+            },
+            "transform": [
+                    {
+                    "lookup": "properties.LGA_NAME24",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
+                        },
+                        "key": "area",
+                        "fields": [
+                            "fertility",
+                            "income",
+                            "rent", 
+                            "year"
+                        ]
+                    }
+                }
+            ],
+            "mark": {
+                "type": "geoshape"
+            },
+            "encoding": {
+                "color": {
+                    "field": "fertility",
+                    "type": "quantitative",
+                    "title": "Birth Rate",
+                    "scale": {
+                        "scheme": "bluegreen"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "properties.LGA_NAME24",
+                        "type": "nominal",
+                        "title": "Area"
+                    },
+                    {
+                        "field": "fertility",
+                        "type": "quantitative",
+                        "title": "Birth Rate"
+                    },
+                    {
+                        "field": "rent",
+                        "type": "quantitative",
+                        "title": "Household Rent"
+                    }, 
+                    {
+                        "field": "year",
+                        "type": "quantitative",
+                        "title": "Year"
+                    }
+                ]
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/final3.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_10m_graticules_1"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "lightgray",
+                "stroke": "gray"
+            }
+        }
+    ]
+}

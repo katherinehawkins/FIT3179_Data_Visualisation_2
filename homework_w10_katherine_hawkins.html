@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <script src="bubble_chart.js"></script>
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="style.css" media="all">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+    <h1><b>Impact on Fertility Rates with Increase in Cost of Living</b></h1>
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <p> All around the world the cost of living has skyrocketed <br>
+            over recent years. Outer Melbourne, Victoria, Australia, is no <br>
+            stranger to this. With a spike in the <br>
+            cost-of-living, the economic pressures make it more difficult<br>
+            to provide for a family. This dashboard aims to illustrate<br>
+            the trends in Outer Melbourne's population in terms of fertility,<br>
+            with these rising living prices.</p>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="inflation_chart" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description description-left">
+        <h2>Influence of Average Rent Prices on Fertility Rates</h2>
+          <p>With around 25% of Victorians renting their homes, the price <br> of this necessity directly correlates with the fertility rate <br> within Victoria's council areas. The higher the rent, the more <br> difficult it is to raise a family.  </p>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="bubble_chart" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="map_chart" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>This visualisation is created by <a href="https://github.com/katherinehawkins/FIT3179" target="_blank">Katherine Hawkins</a>. All data is provided by the Australian Bureau of Statistics.</p>
+      </div>
+    </div>
+
+
+  </div> <!-- end page -->
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 450,
+    "height": 400,
+    "title": "Fertility Rate and Average Monthly Rent for Outer Melbourne Council Areas",
+    "data": {
+        "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
+    },
+    "params": [
+        {
+            "name": "year_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021"
+                ],
+                "labels": [
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021"
+                ],
+                "name": "Select Year: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": "datum.year == year_selection"
+        }
+    ],
+    "encoding": {
+        "x": {
+            "field": "fertility",
+            "type": "quantitative",
+            "title": "Fertility Rate (Number of Births per Female)",
+            "axis": {
+                "tickCount": 10
+            },
+            "scale": {
+                "domain": [
+                    0.5,
+                    2.5
+                ]
+            }
+        },
+        "y": {
+            "field": "rent",
+            "type": "quantitative",
+            "title": "Average Monthly Rent per Household ($)",
+            "axis": {
+                "tickCount": 10
+            },
+            "scale": {
+                "domain": [
+                    200,
+                    600
+                ]
+            }
+        }
+    },
+    "layer": [
+        {
+            "mark": "circle",
+            "encoding": {
+                "size": {
+                    "field": "population",
+                    "type": "quantitative",
+                    "title": "Population",
+                    "scale": {
+                        "type": "threshold",
+                        "domain": [
+                            2500,
+                            5000,
+                            10000,
+                            30000,
+                            50000,
+                            70000,
+                            100000,
+                            150000,
+                            200000
+                        ]
+                    },
+                    "legend": {
+                        "format": ".2s",
+                        "padding": 25
+                    }
+                },
+                "color": {
+                    "field": "region",
+                    "title": "Region", 
+                    "scale": {
+                        "scheme": "bluegreen"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "area",
+                        "type": "nominal",
+                        "title": "Council Area:"
+                    },
+                    {
+                        "field": "population",
+                        "type": "quantitative",
+                        "format": ",",
+                        "title": "Population:"
+                    },
+                    {
+                        "field": "fertility",
+                        "type": "quantitative",
+                        "format": ",",
+                        "title": "Fertility Rate:"
+                    },
+                    {
+                        "field": "rent",
+                        "type": "quantitative",
+                        "format": "$",
+                        "title": "Average Monthly Rent"
+                    }
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "right",
+                "baseline": "middle",
+                "dx": -12,
+                "fontSize": 11.5,
+                "fontStyle": "italic"
+            },
+            "encoding": {
+                "text": {
+                    "field": "area",
+                    "type": "nominal"
+                },
+                "color": {
+                    "value": "black"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "datum['area'] == 'Murrindindi' || datum['area'] == 'Melbourne' || datum['area'] == 'Bayside'",
+                        "value": 1
+                    },
+                    "value": 0
+                },
+                "tooltip": [
+                    {
+                        "field": "area",
+                        "type": "nominal",
+                        "title": "Council Area"
+                    },
+                    {
+                        "field": "population",
+                        "type": "quantitative",
+                        "format": ",",
+                        "title": "Population"
+                    },
+                    {
+                        "field": "fertility",
+                        "type": "quantitative",
+                        "format": ",",
+                        "title": "Fertility Rate"
+                    },
+                    {
+                        "field": "rent",
+                        "type": "quantitative",
+                        "format": "$",
+                        "title": "Average Monthly Rent"
+                    }
+                ]
+            }
+        }
+    ]
+}
