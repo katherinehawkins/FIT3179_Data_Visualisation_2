@@ -4,7 +4,7 @@
     "height": 400,
     "title": "Birth Rates for Inner Melbourne Council Areas (2021)",
     "projection": {
-        "type": "equalEarth"
+        "type": "mercator"
     },
     "layer": [
         {
