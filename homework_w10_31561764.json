@@ -26,13 +26,12 @@
                     "2021"
                 ],
                 "name": "Select Year: "
-            }
+            },
+            "value": "2017"
         }
     ],
     "transform": [
-        {
-            "filter": "datum.year == year_selection"
-        }
+            {"filter": "datum.year == year_selection "}
     ],
     "encoding": {
         "x": {
@@ -75,13 +74,8 @@
                     "scale": {
                         "type": "threshold",
                         "domain": [
-                            2500,
-                            5000,
                             10000,
-                            30000,
                             50000,
-                            70000,
-                            100000,
                             150000,
                             200000
                         ]

@@ -2,53 +2,73 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 450,
     "height": 400,
-    "title": "Birth Rates for Inner Melbourne Council Areas (2021)",
+    "title": "Birth Rates for Inner Melbourne Council Areas",
     "projection": {
         "type": "mercator"
     },
+    "params": [
+        {
+            "name": "year_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021"
+                ],
+                "name": "Select Year: "
+            },
+            "value": "2017"
+        }
+    ],
     "layer": [
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/main/final.topojson",
-                "format": {
-                    "type": "topojson",
-                    "feature": "LGA_2024_AUST_GDA2020"
-                }
+                "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
             },
             "transform": [
                     {
-                    "lookup": "properties.LGA_NAME24",
+                    "lookup": "area",
                     "from": {
                         "data": {
-                            "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
+                            "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/main/final.topojson",
+                            "format": {
+                                "type": "topojson",
+                                "feature": "LGA_2024_AUST_GDA2020"
+                            }
                         },
-                        "key": "area",
-                        "fields": [
-                            "fertility",
-                            "income",
-                            "rent", 
-                            "year"
-                        ]
-                    }
-                }
+                        "key": "properties.LGA_NAME24"
+                    },
+                        "as": "geo"
+                },
+                {
+                    "filter": "datum.year == year_selection"
+                  }
+                
             ],
             "mark": {
                 "type": "geoshape"
             },
             "encoding": {
+                "shape": {"field": "geo", "type": "geojson"},
                 "color": {
                     "field": "fertility",
                     "type": "quantitative",
                     "title": "Birth Rate",
                     "scale": {
-                        "scheme": "bluegreen"
+                        "scheme": "bluegreen", 
+                        "domain": [
+                            0.5, 1, 1.5, 2
+                        ]
                     }
                 },
                 "tooltip": [
                     {
-                        "field": "properties.LGA_NAME24",
+                        "field": "area",
                         "type": "nominal",
-                        "title": "Area"
+                        "title": "Council Area"
                     },
                     {
                         "field": "fertility",
@@ -58,7 +78,8 @@
                     {
                         "field": "rent",
                         "type": "quantitative",
-                        "title": "Household Rent"
+                        "format": "$",
+                        "title": "Average Household Rent"
                     }, 
                     {
                         "field": "year",
