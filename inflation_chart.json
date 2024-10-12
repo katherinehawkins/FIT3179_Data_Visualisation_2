@@ -1,88 +1,105 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Fertility Rate and Inflation in Victoria",
-    "width": 550, "height": 200,
-    "data": {
-      "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/whole_vic_data.csv"
-    },
-    "encoding": {
-      "x": {
-        "field": "year",
-        "title": "Year"
-      }
-    },
-    "layer": [
-      {
-        "mark": {"type": "circle", "color": "green"},
-        "encoding": {
-          "y": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 150,
+  "data": {
+    "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/whole_vic_data.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "title": "Year",
+      "type": "nominal"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "color": "#FFA500"
+      },
+      "encoding": {
+        "y": {
+          "field": "fertility",
+          "type": "quantitative",
+          "title": "Rate (%)"
+        },
+        "tooltip": [
+          {
             "field": "fertility",
-            "title": "Fertility Rate per Woman",
-            "sort": "descending"
+            "type": "nominal",
+            "title": "Fertility Rate"
           },
-          "tooltip": [
-                      {
-                          "field": "fertility",
-                          "type": "nominal",
-                          "title": "Fertility Rate"
-                      },
-                      {
-                          "field": "year",
-                          "type": "quantitative",
-                          "title": "Year"
-                      }
-                  ]
-        }
-      },
-      {
-        "mark": {"stroke": "skyblue", "type": "line", "interpolate": "monotone"},
-        "encoding": {
-          "y": {
-            "field": "inflation",
-            "title": "Inflation (%)",
-            "sort": "descending"
-          },
-          "tooltip": [
-                      {
-                          "field": "inflation",
-                          "type": "nominal",
-                          "title": "Inflation Rate (%)"
-                      },
-                      {
-                          "field": "year",
-                          "type": "quantitative",
-                          "title": "Year"
-                      }
-                  ]
-        }
-      },
-      {
-           "mark": {
-                  "type": "text",
-                  "align": "center",
-                  "baseline": "middle",
-                  "dx": -12,
-                  "fontSize": 11.5,
-                  "fontStyle": "italic"
-              },
-              "encoding": {
-                  "text": {
-                      "value": "In 2020 - Inflation dropped due to Covid-19"
-                      
-                  },
-                  "color": {
-                      "value": "black"
-                  },
-                  "opacity": {
-                      "condition": {
-                          "test": "datum['year'] == '2020'",
-                          "value": 1
-                      },
-                      "value": 0
-                  }
-              }
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year"
+          }
+        ]
       }
-    ],
-    "resolve": {"scale": {"y": "independent"}}
-  }
-  
+    },
+    {
+      "mark": {
+        "stroke": "#DC143C",
+        "type": "line",
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "y": {
+          "field": "inflation",
+          "type": "quantitative",
+          "title": "Rate (%)"
+        },
+        "tooltip": [
+          {
+            "field": "inflation",
+            "type": "nominal",
+            "title": "Inflation Rate (%)"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "line-top",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "value": "In 2020 - Inflation dropped due to the Covid-19 pandemic"
+        },
+        "color": {
+          "value": "black"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['year'] == '2020'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {
+            "field": "inflation",
+            "type": "nominal",
+            "title": "Inflation Rate (%)"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year"
+          }
+        ]
+      }
+    }
+  ]
+}

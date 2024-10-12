@@ -1,8 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 450,
+    "width": "container",
     "height": 400,
-    "title": "Fertility Rate and Average Monthly Rent for Outer Melbourne Council Areas",
     "data": {
         "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
     },
@@ -31,7 +30,9 @@
         }
     ],
     "transform": [
-            {"filter": "datum.year == year_selection "}
+        {
+            "filter": "datum.year == year_selection "
+        }
     ],
     "encoding": {
         "x": {
@@ -82,14 +83,26 @@
                     },
                     "legend": {
                         "format": ".2s",
-                        "padding": 25
+                        "orient": "left"
                     }
                 },
                 "color": {
                     "field": "region",
-                    "title": "Region", 
+                    "title": "Region",
                     "scale": {
-                        "scheme": "bluegreen"
+                        "range": [
+                            "#F4A460",
+                            "#FFD700",
+                            "#8B008B",
+                            "#DDA0DD",
+                            "#F0E68C",
+                            "#FFA500",
+                            "#FFC0CB",
+                            "#DC143C"
+                        ]
+                    },
+                    "legend": {
+                        "orient": "left"
                     }
                 },
                 "tooltip": [

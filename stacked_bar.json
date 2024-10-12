@@ -1,0 +1,100 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 350, "height": 250,
+    "data": {
+        "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/region_births.csv"
+    },
+    "params": [
+        {
+            "name": "region_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "North and West Metro",
+                    "Gippsland",
+                    "Southern Metro",
+                    "Grampians",
+                    "Eastern Metro",
+                    "Loddon Mallee",
+                    "Hume",
+                    "Barwon South West"
+                ],
+                "labels": [
+                    "Show All",
+                    "North and West Metro",
+                    "Gippsland",
+                    "Southern Metro",
+                    "Grampians",
+                    "Eastern Metro",
+                    "Loddon Mallee",
+                    "Hume",
+                    "Barwon South West"
+                ],
+                "name": "Select Region: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": "region_selection == null || datum.region == region_selection "
+        }
+    ],
+    "mark": "bar",
+    "encoding": {
+        "x": {
+            "field": "year",
+            "type": "nominal",
+            "axis": {
+                "title": "Year"
+            }
+        },
+        "y": {
+            "aggregate": "sum",
+            "field": "births",
+            "type": "quantitative",
+            "axis": {
+                "title": "Total Births"
+            }
+        },
+        "color": {
+            "field": "region",
+            "title": "Region",
+            "type": "nominal",
+            "scale": {
+                "domain": [
+                    "Gippsland",
+                    "Grampians",
+                    "Loddon Mallee",
+                    "Hume",
+                    "Barwon South West",
+                    "Eastern Metro",
+                    "North and West Metro",
+                    "Southern Metro"
+                ],
+                "range": [
+                    "#F4A460",
+                    "#FFD700",
+                    "#8B008B",
+                    "#DDA0DD",
+                    "#F0E68C",
+                    "#FFA500",
+                    "#FFC0CB",
+                    "#DC143C"
+                ]
+            }
+        },
+        "tooltip": [
+            {
+                "field": "region",
+                "type": "nominal",
+                "title": "Region"
+            },
+            {
+                "field": "births",
+                "type": "quantitative",
+                "title": "No. Births"
+            }
+        ]
+    }
+}

@@ -1,13 +1,19 @@
 body *{
-    font-family: 'Open Sans', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
+.pure-g {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 h1 {
     font-weight: 900;
 }
-
+h3 {
+    font-weight: 700;
+}
 body {
-    background-color: rgb(100, 199, 100);
+    background-color: rgb(227, 225, 226);
 }
 
 .page {
@@ -19,9 +25,16 @@ body {
 }
 
 .vis-container {
-    width: 90%;
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
 }
-
+.bar-container {
+    background-color: white;
+    border-radius: 15px;
+    width: 60%;
+    margin-left: -190px; 
+}
 .description h2,
 h1 {
     margin-top: 0px;
@@ -41,4 +54,10 @@ h1 {
 
 .small-font {
     font-size: 14px;
+}
+
+.para-container {
+    background-color: white;
+    border-radius: 15px;
+    width: 70%;
 }

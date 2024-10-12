@@ -1,0 +1,305 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "projection": {
+        "type": "mercator"
+    },
+    "params": [
+        {
+            "name": "year_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021"
+                ],
+                "name": "Select Year: "
+            },
+            "value": "2017"
+        }
+    ],
+    
+    "hconcat": [
+        {
+            "width": "container",
+            "height": 400,
+            "data": {
+                "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
+            },
+            "params": [
+                {
+                    "name": "year_selection",
+                    "bind": {
+                        "input": "select",
+                        "options": [
+                            "2017",
+                            "2018",
+                            "2019",
+                            "2020",
+                            "2021"
+                        ],
+                        "labels": [
+                            "2017",
+                            "2018",
+                            "2019",
+                            "2020",
+                            "2021"
+                        ],
+                        "name": "Select Year: "
+                    },
+                    "value": "2017"
+                }
+            ],
+            "transform": [
+                {
+                    "filter": "datum.year == year_selection "
+                }
+            ],
+            "encoding": {
+                "x": {
+                    "field": "fertility",
+                    "type": "quantitative",
+                    "title": "Fertility Rate (Number of Births per Female)",
+                    "axis": {
+                        "tickCount": 10
+                    },
+                    "scale": {
+                        "domain": [
+                            0.5,
+                            2.5
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "rent",
+                    "type": "quantitative",
+                    "title": "Average Monthly Rent per Household ($)",
+                    "axis": {
+                        "tickCount": 10
+                    },
+                    "scale": {
+                        "domain": [
+                            200,
+                            600
+                        ]
+                    }
+                }
+            },
+            "layer": [
+                {
+                    "mark": "circle",
+                    "encoding": {
+                        "size": {
+                            "field": "population",
+                            "type": "quantitative",
+                            "title": "Population",
+                            "scale": {
+                                "type": "threshold",
+                                "domain": [
+                                    10000,
+                                    50000,
+                                    150000,
+                                    200000
+                                ]
+                            },
+                            "legend": {
+                                "format": ".2s",
+                                "orient": "left"
+                            }
+                        },
+                        "color": {
+                            "field": "region",
+                            "title": "Region",
+                            "scale": {
+                                "range": [
+                                    "#F4A460",
+                                    "#FFD700",
+                                    "#8B008B",
+                                    "#DDA0DD",
+                                    "#F0E68C",
+                                    "#FFA500",
+                                    "#FFC0CB",
+                                    "#DC143C"
+                                ]
+                            },
+                            "legend": {
+                                "direction": "vertical",
+                                "orient": "right"
+
+                            }
+                        },
+                        "tooltip": [
+                            {
+                                "field": "area",
+                                "type": "nominal",
+                                "title": "Council Area:"
+                            },
+                            {
+                                "field": "population",
+                                "type": "quantitative",
+                                "format": ",",
+                                "title": "Population:"
+                            },
+                            {
+                                "field": "fertility",
+                                "type": "quantitative",
+                                "format": ",",
+                                "title": "Fertility Rate:"
+                            },
+                            {
+                                "field": "rent",
+                                "type": "quantitative",
+                                "format": "$",
+                                "title": "Average Monthly Rent"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "align": "right",
+                        "baseline": "middle",
+                        "dx": -12,
+                        "fontSize": 11.5,
+                        "fontStyle": "italic"
+                    },
+                    "encoding": {
+                        "text": {
+                            "field": "area",
+                            "type": "nominal"
+                        },
+                        "color": {
+                            "value": "black"
+                        },
+                        "opacity": {
+                            "condition": {
+                                "test": "datum['area'] == 'Murrindindi' || datum['area'] == 'Melbourne' || datum['area'] == 'Bayside'",
+                                "value": 1
+                            },
+                            "value": 0
+                        },
+                        "tooltip": [
+                            {
+                                "field": "area",
+                                "type": "nominal",
+                                "title": "Council Area"
+                            },
+                            {
+                                "field": "population",
+                                "type": "quantitative",
+                                "format": ",",
+                                "title": "Population"
+                            },
+                            {
+                                "field": "fertility",
+                                "type": "quantitative",
+                                "format": ",",
+                                "title": "Fertility Rate"
+                            },
+                            {
+                                "field": "rent",
+                                "type": "quantitative",
+                                "format": "$",
+                                "title": "Average Monthly Rent"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "container",
+            "height": 400,
+            "layer": [
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/council_data.csv"
+                    },
+                    "transform": [
+                        {
+                            "lookup": "area",
+                            "from": {
+                                "data": {
+                                    "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/main/final.topojson",
+                                    "format": {
+                                        "type": "topojson",
+                                        "feature": "LGA_2024_AUST_GDA2020"
+                                    }
+                                },
+                                "key": "properties.LGA_NAME24"
+                            },
+                            "as": "geo"
+                        },
+                        {
+                            "filter": "datum.year == year_selection"
+                        }
+                    ],
+                    "mark": {
+                        "type": "geoshape",
+                        "stroke": "#757575"
+                    },
+                    "encoding": {
+                        "shape": {
+                            "field": "geo",
+                            "type": "geojson"
+                        },
+                        "color": {
+                            "field": "fertility",
+                            "type": "quantitative",
+                            "title": "Birth Rate",
+                            "scale": {
+                                "type": "threshold",
+                                "domain": [
+                                    0.8,
+                                    1.3,
+                                    1.8
+                                ],
+                                "range": ["#FFF0F5", "#FFC0CB", "#F08080", "#DC143C"]
+                            }
+                        },
+                        "tooltip": [
+                            {
+                                "field": "area",
+                                "type": "nominal",
+                                "title": "Council Area"
+                            },
+                            {
+                                "field": "fertility",
+                                "type": "quantitative",
+                                "title": "Birth Rate"
+                            },
+                            {
+                                "field": "rent",
+                                "type": "quantitative",
+                                "format": "$",
+                                "title": "Average Household Rent"
+                            },
+                            {
+                                "field": "year",
+                                "type": "quantitative",
+                                "title": "Year"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/final3.topojson",
+                        "format": {
+                            "type": "topojson",
+                            "feature": "ne_10m_graticules_1"
+                        }
+                    },
+                    "mark": {
+                        "type": "geoshape",
+                        "fill": "lightgray",
+                        "stroke": "gray"
+                    }
+                }
+            ]
+        }
+    ]
+}
