@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 600,
+  "width": 580,
   "height": 150,
   "data": {
     "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/whole_vic_data.csv"
@@ -9,7 +9,16 @@
     "x": {
       "field": "year",
       "title": "Year",
-      "type": "nominal"
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021
+        ]
+      }
     }
   },
   "layer": [
@@ -35,14 +44,23 @@
             "type": "quantitative",
             "title": "Year"
           }
-        ]
+        ],
+        "color": {
+          "datum": "Fertility",
+          "scale": {
+            "range": [
+              "#FFA500",
+              "#DC143C"
+            ]
+          }
+        }
       }
     },
     {
       "mark": {
-        "stroke": "#DC143C",
         "type": "line",
-        "interpolate": "monotone"
+        "interpolate": "monotone",
+        "color": "#DC143C"
       },
       "encoding": {
         "y": {
@@ -61,44 +79,15 @@
             "type": "quantitative",
             "title": "Year"
           }
-        ]
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "baseline": "line-top",
-        "dx": -12,
-        "fontSize": 11.5,
-        "fontStyle": "italic"
-      },
-      "encoding": {
-        "text": {
-          "value": "In 2020 - Inflation dropped due to the Covid-19 pandemic"
-        },
+        ],
         "color": {
-          "value": "black"
-        },
-        "opacity": {
-          "condition": {
-            "test": "datum['year'] == '2020'",
-            "value": 1
-          },
-          "value": 0
-        },
-        "tooltip": [
-          {
-            "field": "inflation",
-            "type": "nominal",
-            "title": "Inflation Rate (%)"
-          },
-          {
-            "field": "year",
-            "type": "quantitative",
-            "title": "Year"
+          "datum": "Inflation",
+          "scale": {
+            "range": [
+              "#DC143C"
+            ]
           }
-        ]
+        }
       }
     }
   ]

@@ -1,6 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 350, "height": 250,
+    "width": 580,
+    "height": 250,
     "data": {
         "url": "https://raw.githubusercontent.com/katherinehawkins/FIT3179/refs/heads/main/region_births.csv"
     },
@@ -31,7 +32,7 @@
                     "Hume",
                     "Barwon South West"
                 ],
-                "name": "Select Region: "
+                "name": "Select Region:"
             }
         }
     ],
