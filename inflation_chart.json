@@ -89,6 +89,44 @@
           }
         }
       }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "center",
+        "dy": 60,
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "font": "Arial"
+      },
+      "encoding": {
+        "text": {
+          "value": "In 2020 - Inflation dropped due to the Covid-19 pandemic"
+        },
+        "color": {
+          "value": "black"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['year'] == '2020'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {
+            "field": "inflation",
+            "type": "nominal",
+            "title": "Inflation Rate (%)"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year"
+          }
+        ]
+      }
     }
   ]
 }

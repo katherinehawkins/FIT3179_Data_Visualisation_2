@@ -151,10 +151,11 @@
                     "mark": {
                         "type": "text",
                         "align": "right",
-                        "baseline": "middle",
+                        "baseline": "center",
                         "dx": -12,
                         "fontSize": 11.5,
-                        "fontStyle": "italic"
+                        "fontStyle": "italic",
+                        "font": "Arial"
                     },
                     "encoding": {
                         "text": {
