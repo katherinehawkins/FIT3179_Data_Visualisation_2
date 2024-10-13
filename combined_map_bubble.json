@@ -116,9 +116,9 @@
                         "opacity": {
                             "condition": {
                                 "selection": "region_highlight",
-                                "value": 0.7
+                                "value": 0.8
                             },
-                            "value": 0.2
+                            "value": 0.05
                         },
                         "tooltip": [
                             {
